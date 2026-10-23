@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Monitor de preços — demo</title>
+<style>
+  :root { --bg:#f4f6f8; --card:#fff; --txt:#1f2937; --mut:#6b7280; --borda:#e5e7eb;
+          --verm:#c62828; --verd:#2e7d32; --verm-bg:#fdecec; --verd-bg:#e8f5e9; }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--txt);
+         font:15px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; }
+  .wrap { max-width:1100px; margin:0 auto; padding:20px 16px 40px; }
+  header h1 { margin:0 0 4px; font-size:1.6rem; }
+  header p { margin:0 0 18px; color:var(--mut); }
+  .kpis { display:grid; grid-template-columns:repeat(auto-fit,minmax(150px,1fr)); gap:12px; margin-bottom:18px; }
+  .kpi { background:var(--card); border:1px solid var(--borda); border-radius:10px; padding:14px 16px; }
+  .kpi .v { font-size:1.9rem; font-weight:700; line-height:1.1; }
+  .kpi .l { color:var(--mut); font-size:.85rem; margin-top:4px; }
+  .card { background:var(--card); border:1px solid var(--borda); border-radius:10px; padding:16px; margin-bottom:18px; }
+  .card h2 { margin:0 0 10px; font-size:1.1rem; }
+  .card p.ajuda { color:var(--mut); font-size:.85rem; margin:0 0 8px; }
+  .tabela-wrap { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; min-width:760px; font-size:.92rem; }
+  th, td { padding:8px 10px; border-bottom:1px solid var(--borda); text-align:left; vertical-align:top; }
+  th { background:#f9fafb; cursor:pointer; user-select:none; white-space:nowrap; position:sticky; top:0; }
+  th:hover { background:#eef2f6; }
+  th .seta { color:var(--mut); font-size:.75rem; margin-left:4px; }
+  td.num { text-align:right; white-space:nowrap; font-variant-numeric:tabular-nums; }
+  tr.caro td { background:var(--verm-bg); }
+  tr.barato td { background:var(--verd-bg); }
+  a { color:#0b5cad; text-decoration:none; } a:hover { text-decoration:underline; }
+  footer { color:var(--mut); font-size:.85rem; text-align:center; margin-top:24px; }
+  @media (max-width:600px) { .kpi .v { font-size:1.5rem; } header h1 { font-size:1.3rem; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <h1>Monitor de preços — demo</h1>
+  <p>Comparação entre a minha tabela e o catálogo do concorrente · coleta de 23/10/2026 09:20 ·
+     60 produtos raspados em 3 páginas</p>
+</header>
+
+<section class="kpis" id="kpis">
+  <div class="kpi"><div class="v">20</div><div class="l">produtos monitorados</div></div>
+  <div class="kpi"><div class="v" style="color:var(--verm)">5</div><div class="l">estou mais caro</div></div>
+  <div class="kpi"><div class="v" style="color:var(--verd)">13</div><div class="l">estou mais barato</div></div>
+  <div class="kpi"><div class="v" style="color:#2e7d32">-2,0%</div><div class="l">diferença média</div></div>
+  <div class="kpi"><div class="v">4</div><div class="l">alertas (&gt; 5% acima)</div></div>
+</section>
+
+<section class="card">
+  <h2>Diferença % por produto</h2>
+  <p class="ajuda">Meu preço em relação ao concorrente. Barra à direita (vermelho) = estou mais caro; à esquerda (verde) = mais barato.</p>
+  <svg viewBox="0 0 860 554" width="100%" role="img" aria-label="Diferença percentual do meu preço em relação ao concorrente" style="font-family:inherit;font-size:12px">
+<line x1="580.0" y1="18" x2="580.0" y2="548" stroke="#9aa4b2" stroke-width="1"/>
+<text x="580.0" y="12" text-anchor="middle" fill="#6b7280">0%</text>
+<text x="572.0" y="12" text-anchor="end" fill="#2e7d32">mais barato ◀</text>
+<text x="588.0" y="12" text-anchor="start" fill="#c62828">▶ mais caro</text>
+<g><title>Sapiens: A Brief History of Humankind: +22,0%</title>
+<text x="10" y="40" fill="#1f2937">Sapiens: A Brief History of Humankind</text>
+<rect x="580.0" y="28" width="220.0" height="18" rx="3" fill="#c62828" opacity="0.9"/>
+<text x="806.0" y="40" text-anchor="start" fill="#374151">+22,0%</text></g>
+<g><title>Set Me Free: +22,0%</title>
+<text x="10" y="66" fill="#1f2937">Set Me Free</text>
+<rect x="580.0" y="54" width="219.9" height="18" rx="3" fill="#c62828" opacity="0.9"/>
+<text x="805.9" y="66" text-anchor="start" fill="#374151">+22,0%</text></g>
+<g><title>The Dirty Little Secrets of Getting Your Dream Job: +22,0%</title>
+<text x="10" y="92" fill="#1f2937">The Dirty Little Secrets of Getting Yo…</text>
+<rect x="580.0" y="80" width="219.9" height="18" rx="3" fill="#c62828" opacity="0.9"/>
+<text x="805.9" y="92" text-anchor="start" fill="#374151">+22,0%</text></g>
+<g><title>We Love You, Charlie Freeman: +10,0%</title>
+<text x="10" y="118" fill="#1f2937">We Love You, Charlie Freeman</text>
+<rect x="580.0" y="106" width="100.1" height="18" rx="3" fill="#c62828" opacity="0.9"/>
+<text x="686.1" y="118" text-anchor="start" fill="#374151">+10,0%</text></g>
+<g><title>Maude (1883-1993):She Grew Up with the country: +3,0%</title>
+<text x="10" y="144" fill="#1f2937">Maude (1883-1993):She Grew Up with the…</text>
+<rect x="580.0" y="132" width="30.0" height="18" rx="3" fill="#c62828" opacity="0.9"/>
+<text x="616.0" y="144" text-anchor="start" fill="#374151">+3,0%</text></g>
+<g><title>The Five Love Languages: How to Express Heartfelt Commitment to Your Mate: +0,0%</title>
+<text x="10" y="170" fill="#1f2937">The Five Love Languages: How to Expres…</text>
+<rect x="580.0" y="158" width="2.0" height="18" rx="3" fill="#9aa4b2" opacity="0.9"/>
+<text x="588.0" y="170" text-anchor="start" fill="#374151">+0,0%</text></g>
+<g><title>When We Collided: +0,0%</title>
+<text x="10" y="196" fill="#1f2937">When We Collided</text>
+<rect x="580.0" y="184" width="2.0" height="18" rx="3" fill="#9aa4b2" opacity="0.9"/>
+<text x="588.0" y="196" text-anchor="start" fill="#374151">+0,0%</text></g>
+<g><title>Scott Pilgrim&#x27;s Precious Little Life (Scott Pilgrim #1): -3,0%</title>
+<text x="10" y="222" fill="#1f2937">Scott Pilgrim&#x27;s Precious Little Life (…</text>
+<rect x="550.0" y="210" width="30.0" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="544.0" y="222" text-anchor="end" fill="#374151">-3,0%</text></g>
+<g><title>The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics: -3,0%</title>
+<text x="10" y="248" fill="#1f2937">The Boys in the Boat: Nine Americans a…</text>
+<rect x="549.9" y="236" width="30.1" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="543.9" y="248" text-anchor="end" fill="#374151">-3,0%</text></g>
+<g><title>Thirst: -3,0%</title>
+<text x="10" y="274" fill="#1f2937">Thirst</text>
+<rect x="549.9" y="262" width="30.1" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="543.9" y="274" text-anchor="end" fill="#374151">-3,0%</text></g>
+<g><title>Mesaerion: The Best Science Fiction Stories 1800-1849: -3,0%</title>
+<text x="10" y="300" fill="#1f2937">Mesaerion: The Best Science Fiction St…</text>
+<rect x="549.9" y="288" width="30.1" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="543.9" y="300" text-anchor="end" fill="#374151">-3,0%</text></g>
+<g><title>The Bear and the Piano: -6,0%</title>
+<text x="10" y="326" fill="#1f2937">The Bear and the Piano</text>
+<rect x="520.1" y="314" width="59.9" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="514.1" y="326" text-anchor="end" fill="#374151">-6,0%</text></g>
+<g><title>Throwing Rocks at the Google Bus: How Growth Became the Enemy of Prosperity: -10,0%</title>
+<text x="10" y="352" fill="#1f2937">Throwing Rocks at the Google Bus: How…</text>
+<rect x="480.1" y="340" width="99.9" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="474.1" y="352" text-anchor="end" fill="#374151">-10,0%</text></g>
+<g><title>Unseen City: The Majesty of Pigeons, the Discreet Charm of Snails &amp; Other Wonders of the Urban Wilderness: -10,0%</title>
+<text x="10" y="378" fill="#1f2937">Unseen City: The Majesty of Pigeons, t…</text>
+<rect x="480.0" y="366" width="100.0" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="474.0" y="378" text-anchor="end" fill="#374151">-10,0%</text></g>
+<g><title>The Pioneer Woman Cooks: Dinnertime: Comfort Classics, Freezer Food, 16-Minute Meals, and Other Delicious Ways to Solve Supper!: -10,0%</title>
+<text x="10" y="404" fill="#1f2937">The Pioneer Woman Cooks: Dinnertime: C…</text>
+<rect x="480.0" y="392" width="100.0" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="474.0" y="404" text-anchor="end" fill="#374151">-10,0%</text></g>
+<g><title>A Light in the Attic: -10,0%</title>
+<text x="10" y="430" fill="#1f2937">A Light in the Attic</text>
+<rect x="479.9" y="418" width="100.1" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="473.9" y="430" text-anchor="end" fill="#374151">-10,0%</text></g>
+<g><title>Sharp Objects: -15,0%</title>
+<text x="10" y="456" fill="#1f2937">Sharp Objects</text>
+<rect x="430.1" y="444" width="149.9" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="424.1" y="456" text-anchor="end" fill="#374151">-15,0%</text></g>
+<g><title>The Requiem Red: -15,0%</title>
+<text x="10" y="482" fill="#1f2937">The Requiem Red</text>
+<rect x="429.9" y="470" width="150.1" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="423.9" y="482" text-anchor="end" fill="#374151">-15,0%</text></g>
+<g><title>Unbound: How Eight Technologies Made Us Human, Transformed Society, and Brought Our World to the Brink: -15,0%</title>
+<text x="10" y="508" fill="#1f2937">Unbound: How Eight Technologies Made U…</text>
+<rect x="429.9" y="496" width="150.1" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="423.9" y="508" text-anchor="end" fill="#374151">-15,0%</text></g>
+<g><title>Slow States of Collapse: Poems: -15,0%</title>
+<text x="10" y="534" fill="#1f2937">Slow States of Collapse: Poems</text>
+<rect x="429.9" y="522" width="150.1" height="18" rx="3" fill="#2e7d32" opacity="0.9"/>
+<text x="423.9" y="534" text-anchor="end" fill="#374151">-15,0%</text></g>
+</svg>
+</section>
+
+<section class="card">
+  <h2>Comparativo</h2>
+  <p class="ajuda">Clique no cabeçalho para ordenar. Linhas vermelhas: mais de 5% acima do concorrente; verdes: abaixo.</p>
+  <div class="tabela-wrap">
+  <table id="tab">
+    <thead><tr>
+      <th>Código</th><th>Produto</th><th class="num">Meu preço</th><th class="num">Concorrente</th>
+      <th class="num">Diferença</th><th class="num">Dif. %</th><th>Situação</th><th class="num">Estrelas</th><th>Disponib.</th>
+    </tr></thead>
+    <tbody>
+    <tr class="caro"><td>SKU-020</td><td><a href="https://books.toscrape.com/catalogue/sapiens-a-brief-history-of-humankind_996/index.html" target="_blank" rel="noopener">Sapiens: A Brief History of Humankind</a></td><td class="num" data-v="66.16">£ 66,16</td><td class="num" data-v="54.23">£ 54,23</td><td class="num" data-v="11.93">£ 11,93</td><td class="num" data-v="22.0"><b>+22,0%</b></td><td>estou mais caro</td><td class="num" data-v="5" title="5 de 5">★★★★★</td><td>Em estoque</td></tr><tr class="caro"><td>SKU-009</td><td><a href="https://books.toscrape.com/catalogue/set-me-free_988/index.html" target="_blank" rel="noopener">Set Me Free</a></td><td class="num" data-v="21.3">£ 21,30</td><td class="num" data-v="17.46">£ 17,46</td><td class="num" data-v="3.84">£ 3,84</td><td class="num" data-v="21.99"><b>+22,0%</b></td><td>estou mais caro</td><td class="num" data-v="5" title="5 de 5">★★★★★</td><td>Em estoque</td></tr><tr class="caro"><td>SKU-018</td><td><a href="https://books.toscrape.com/catalogue/the-dirty-little-secrets-of-getting-your-dream-job_994/index.html" target="_blank" rel="noopener">The Dirty Little Secrets of Getting Your Dream Job</a></td><td class="num" data-v="40.67">£ 40,67</td><td class="num" data-v="33.34">£ 33,34</td><td class="num" data-v="7.33">£ 7,33</td><td class="num" data-v="21.99"><b>+22,0%</b></td><td>estou mais caro</td><td class="num" data-v="4" title="4 de 5">★★★★☆</td><td>Em estoque</td></tr><tr class="caro"><td>SKU-011</td><td><a href="https://books.toscrape.com/catalogue/we-love-you-charlie-freeman_954/index.html" target="_blank" rel="noopener">We Love You, Charlie Freeman</a></td><td class="num" data-v="55.3">£ 55,30</td><td class="num" data-v="50.27">£ 50,27</td><td class="num" data-v="5.03">£ 5,03</td><td class="num" data-v="10.01"><b>+10,0%</b></td><td>estou mais caro</td><td class="num" data-v="5" title="5 de 5">★★★★★</td><td>Em estoque</td></tr><tr class=""><td>SKU-003</td><td><a href="https://books.toscrape.com/catalogue/maude-1883-1993she-grew-up-with-the-country_964/index.html" target="_blank" rel="noopener">Maude (1883-1993):She Grew Up with the country</a></td><td class="num" data-v="18.56">£ 18,56</td><td class="num" data-v="18.02">£ 18,02</td><td class="num" data-v="0.54">£ 0,54</td><td class="num" data-v="3.0"><b>+3,0%</b></td><td>estou mais caro</td><td class="num" data-v="2" title="2 de 5">★★☆☆☆</td><td>Em estoque</td></tr><tr class=""><td>SKU-013</td><td><a href="https://books.toscrape.com/catalogue/the-five-love-languages-how-to-express-heartfelt-commitment-to-your-mate_969/index.html" target="_blank" rel="noopener">The Five Love Languages: How to Express Heartfelt Commitment to Your Mate</a></td><td class="num" data-v="31.05">£ 31,05</td><td class="num" data-v="31.05">£ 31,05</td><td class="num" data-v="0.0">£ 0,00</td><td class="num" data-v="0.0"><b>+0,0%</b></td><td>igual</td><td class="num" data-v="3" title="3 de 5">★★★☆☆</td><td>Em estoque</td></tr><tr class=""><td>SKU-004</td><td><a href="https://books.toscrape.com/catalogue/when-we-collided_955/index.html" target="_blank" rel="noopener">When We Collided</a></td><td class="num" data-v="31.77">£ 31,77</td><td class="num" data-v="31.77">£ 31,77</td><td class="num" data-v="0.0">£ 0,00</td><td class="num" data-v="0.0"><b>+0,0%</b></td><td>igual</td><td class="num" data-v="1" title="1 de 5">★☆☆☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-005</td><td><a href="https://books.toscrape.com/catalogue/scott-pilgrims-precious-little-life-scott-pilgrim-1_987/index.html" target="_blank" rel="noopener">Scott Pilgrim&#x27;s Precious Little Life (Scott Pilgrim #1)</a></td><td class="num" data-v="50.72">£ 50,72</td><td class="num" data-v="52.29">£ 52,29</td><td class="num" data-v="-1.57">£ -1,57</td><td class="num" data-v="-3.0"><b>-3,0%</b></td><td>estou mais barato</td><td class="num" data-v="5" title="5 de 5">★★★★★</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-017</td><td><a href="https://books.toscrape.com/catalogue/the-boys-in-the-boat-nine-americans-and-their-epic-quest-for-gold-at-the-1936-berlin-olympics_992/index.html" target="_blank" rel="noopener">The Boys in the Boat: Nine Americans and Their Epic Quest for Gold at the 1936 Berlin Olympics</a></td><td class="num" data-v="21.92">£ 21,92</td><td class="num" data-v="22.6">£ 22,60</td><td class="num" data-v="-0.68">£ -0,68</td><td class="num" data-v="-3.01"><b>-3,0%</b></td><td>estou mais barato</td><td class="num" data-v="4" title="4 de 5">★★★★☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-006</td><td><a href="https://books.toscrape.com/catalogue/thirst_946/index.html" target="_blank" rel="noopener">Thirst</a></td><td class="num" data-v="16.75">£ 16,75</td><td class="num" data-v="17.27">£ 17,27</td><td class="num" data-v="-0.52">£ -0,52</td><td class="num" data-v="-3.01"><b>-3,0%</b></td><td>estou mais barato</td><td class="num" data-v="5" title="5 de 5">★★★★★</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-016</td><td><a href="https://books.toscrape.com/catalogue/mesaerion-the-best-science-fiction-stories-1800-1849_983/index.html" target="_blank" rel="noopener">Mesaerion: The Best Science Fiction Stories 1800-1849</a></td><td class="num" data-v="36.46">£ 36,46</td><td class="num" data-v="37.59">£ 37,59</td><td class="num" data-v="-1.13">£ -1,13</td><td class="num" data-v="-3.01"><b>-3,0%</b></td><td>estou mais barato</td><td class="num" data-v="1" title="1 de 5">★☆☆☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-007</td><td><a href="https://books.toscrape.com/catalogue/the-bear-and-the-piano_967/index.html" target="_blank" rel="noopener">The Bear and the Piano</a></td><td class="num" data-v="34.68">£ 34,68</td><td class="num" data-v="36.89">£ 36,89</td><td class="num" data-v="-2.21">£ -2,21</td><td class="num" data-v="-5.99"><b>-6,0%</b></td><td>estou mais barato</td><td class="num" data-v="1" title="1 de 5">★☆☆☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-015</td><td><a href="https://books.toscrape.com/catalogue/throwing-rocks-at-the-google-bus-how-growth-became-the-enemy-of-prosperity_948/index.html" target="_blank" rel="noopener">Throwing Rocks at the Google Bus: How Growth Became the Enemy of Prosperity</a></td><td class="num" data-v="28.01">£ 28,01</td><td class="num" data-v="31.12">£ 31,12</td><td class="num" data-v="-3.11">£ -3,11</td><td class="num" data-v="-9.99"><b>-10,0%</b></td><td>estou mais barato</td><td class="num" data-v="3" title="3 de 5">★★★☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-008</td><td><a href="https://books.toscrape.com/catalogue/unseen-city-the-majesty-of-pigeons-the-discreet-charm-of-snails-other-wonders-of-the-urban-wilderness_952/index.html" target="_blank" rel="noopener">Unseen City: The Majesty of Pigeons, the Discreet Charm of Snails &amp; Other Wonders of the Urban Wilderness</a></td><td class="num" data-v="39.76">£ 39,76</td><td class="num" data-v="44.18">£ 44,18</td><td class="num" data-v="-4.42">£ -4,42</td><td class="num" data-v="-10.0"><b>-10,0%</b></td><td>estou mais barato</td><td class="num" data-v="4" title="4 de 5">★★★★☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-010</td><td><a href="https://books.toscrape.com/catalogue/the-pioneer-woman-cooks-dinnertime-comfort-classics-freezer-food-16-minute-meals-and-other-delicious-ways-to-solve-supper_943/index.html" target="_blank" rel="noopener">The Pioneer Woman Cooks: Dinnertime: Comfort Classics, Freezer Food, 16-Minute Meals, and Other Delicious Ways to Solve Supper!</a></td><td class="num" data-v="50.77">£ 50,77</td><td class="num" data-v="56.41">£ 56,41</td><td class="num" data-v="-5.64">£ -5,64</td><td class="num" data-v="-10.0"><b>-10,0%</b></td><td>estou mais barato</td><td class="num" data-v="1" title="1 de 5">★☆☆☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-001</td><td><a href="https://books.toscrape.com/catalogue/a-light-in-the-attic_1000/index.html" target="_blank" rel="noopener">A Light in the Attic</a></td><td class="num" data-v="46.59">£ 46,59</td><td class="num" data-v="51.77">£ 51,77</td><td class="num" data-v="-5.18">£ -5,18</td><td class="num" data-v="-10.01"><b>-10,0%</b></td><td>estou mais barato</td><td class="num" data-v="3" title="3 de 5">★★★☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-014</td><td><a href="https://books.toscrape.com/catalogue/sharp-objects_997/index.html" target="_blank" rel="noopener">Sharp Objects</a></td><td class="num" data-v="40.65">£ 40,65</td><td class="num" data-v="47.82">£ 47,82</td><td class="num" data-v="-7.17">£ -7,17</td><td class="num" data-v="-14.99"><b>-15,0%</b></td><td>estou mais barato</td><td class="num" data-v="4" title="4 de 5">★★★★☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-002</td><td><a href="https://books.toscrape.com/catalogue/the-requiem-red_995/index.html" target="_blank" rel="noopener">The Requiem Red</a></td><td class="num" data-v="19.25">£ 19,25</td><td class="num" data-v="22.65">£ 22,65</td><td class="num" data-v="-3.4">£ -3,40</td><td class="num" data-v="-15.01"><b>-15,0%</b></td><td>estou mais barato</td><td class="num" data-v="1" title="1 de 5">★☆☆☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-012</td><td><a href="https://books.toscrape.com/catalogue/unbound-how-eight-technologies-made-us-human-transformed-society-and-brought-our-world-to-the-brink_950/index.html" target="_blank" rel="noopener">Unbound: How Eight Technologies Made Us Human, Transformed Society, and Brought Our World to the Brink</a></td><td class="num" data-v="21.69">£ 21,69</td><td class="num" data-v="25.52">£ 25,52</td><td class="num" data-v="-3.83">£ -3,83</td><td class="num" data-v="-15.01"><b>-15,0%</b></td><td>estou mais barato</td><td class="num" data-v="1" title="1 de 5">★☆☆☆☆</td><td>Em estoque</td></tr><tr class="barato"><td>SKU-019</td><td><a href="https://books.toscrape.com/catalogue/slow-states-of-collapse-poems_960/index.html" target="_blank" rel="noopener">Slow States of Collapse: Poems</a></td><td class="num" data-v="48.71">£ 48,71</td><td class="num" data-v="57.31">£ 57,31</td><td class="num" data-v="-8.6">£ -8,60</td><td class="num" data-v="-15.01"><b>-15,0%</b></td><td>estou mais barato</td><td class="num" data-v="3" title="3 de 5">★★★☆☆</td><td>Em estoque</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<section class="card"><h2>Itens da minha tabela sem par no concorrente (2)</h2><ul><li>SKU-021 — Produto exclusivo da minha loja A</li><li>SKU-022 — Produto exclusivo da minha loja B</li></ul></section>
+
+<footer>Demo com dados reais de um site de treino de scraping (books.toscrape.com) e preços próprios fictícios · Marcos Galani · automação de processos</footer>
+</div>
+
+<script>
+(function () {
+  var tab = document.getElementById('tab');
+  var ths = tab.querySelectorAll('th');
+  var dir = {};
+  ths.forEach(function (th, idx) {
+    th.addEventListener('click', function () {
+      var asc = dir[idx] = !dir[idx];
+      ths.forEach(function (t) { var s = t.querySelector('.seta'); if (s) s.remove(); });
+      var seta = document.createElement('span'); seta.className = 'seta'; seta.textContent = asc ? '▲' : '▼';
+      th.appendChild(seta);
+      var tb = tab.tBodies[0];
+      var linhas = Array.prototype.slice.call(tb.rows);
+      linhas.sort(function (a, b) {
+        var ca = a.cells[idx], cb = b.cells[idx];
+        var va = ca.dataset.v !== undefined ? parseFloat(ca.dataset.v) : ca.textContent.trim().toLowerCase();
+        var vb = cb.dataset.v !== undefined ? parseFloat(cb.dataset.v) : cb.textContent.trim().toLowerCase();
+        if (va < vb) return asc ? -1 : 1;
+        if (va > vb) return asc ? 1 : -1;
+        return 0;
+      });
+      linhas.forEach(function (l) { tb.appendChild(l); });
+    });
+  });
+})();
+</script>
+</body>
+</html>
